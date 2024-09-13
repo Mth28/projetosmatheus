@@ -63,7 +63,7 @@ public class EsfirrasDoces extends JFrame {
 
         // Painel para opções de sabores
         JPanel panelRecheios = new JPanel();
-        panelRecheios.setBounds(5, 72, 300, 200); // Ajustado o tamanho do painel
+        panelRecheios.setBounds(5, 11, 300, 200); // Ajustado o tamanho do painel
         panelRecheios.setBorder(BorderFactory.createTitledBorder("Escolha os Sabores"));
         contentPane.add(panelRecheios);
         panelRecheios.setLayout(new GridLayout(SABORES.length, 1, 5, 5));
@@ -76,7 +76,7 @@ public class EsfirrasDoces extends JFrame {
 
         // Painel para opções adicionais e informações do cliente
         JPanel panelExtras = new JPanel();
-        panelExtras.setBounds(310, 72, 660, 400); // Ajustado o tamanho do painel
+        panelExtras.setBounds(308, 11, 660, 410); // Ajustado o tamanho do painel
         panelExtras.setBorder(BorderFactory.createTitledBorder("Extras e Tamanho"));
         contentPane.add(panelExtras);
         panelExtras.setLayout(null);
@@ -110,7 +110,7 @@ public class EsfirrasDoces extends JFrame {
         panelExtras.add(lblQuantidade);
 
         sliderQuantidade = new JSlider(1, 10, 1);
-        sliderQuantidade.setBounds(130, 96, 250, 50);
+        sliderQuantidade.setBounds(130, 96, 250, 38);
         sliderQuantidade.setMajorTickSpacing(1);
         sliderQuantidade.setPaintTicks(true);
         sliderQuantidade.setPaintLabels(true);
@@ -141,7 +141,7 @@ public class EsfirrasDoces extends JFrame {
         panelExtras.add(lblNome);
 
         txtNome = new JTextField();
-        txtNome.setBounds(90, 176, 200, 30);
+        txtNome.setBounds(180, 176, 200, 30);
         panelExtras.add(txtNome);
 
         JLabel lblTelefone = new JLabel("Telefone:");
@@ -149,7 +149,7 @@ public class EsfirrasDoces extends JFrame {
         panelExtras.add(lblTelefone);
 
         txtTelefone = new JTextField();
-        txtTelefone.setBounds(90, 216, 200, 30);
+        txtTelefone.setBounds(180, 216, 200, 30);
         panelExtras.add(txtTelefone);
 
         JLabel lblEndereco = new JLabel("Endereço:");
@@ -157,40 +157,43 @@ public class EsfirrasDoces extends JFrame {
         panelExtras.add(lblEndereco);
 
         txtEndereco = new JTextField();
-        txtEndereco.setBounds(90, 256, 200, 30);
+        txtEndereco.setBounds(180, 256, 200, 30);
         panelExtras.add(txtEndereco);
 
         // Formas de pagamento
         JLabel lblPagamento = new JLabel("Forma de Pagamento:");
-        lblPagamento.setBounds(6, 296, 150, 30);
+        lblPagamento.setBounds(6, 315, 150, 30);
         panelExtras.add(lblPagamento);
 
         comboBoxPagamento = new JComboBox<>(FORMAS_PAGAMENTO);
-        comboBoxPagamento.setBounds(160, 296, 130, 30);
+        comboBoxPagamento.setBounds(185, 315, 130, 30);
         panelExtras.add(comboBoxPagamento);
 
         btnConfirmar = new JButton("Confirmar Pedido");
-        btnConfirmar.setBounds(6, 336, 150, 50);
+        btnConfirmar.setBounds(6, 356, 150, 30);
         btnConfirmar.addActionListener(e -> mostrarResumo());
         panelExtras.add(btnConfirmar);
 
         // Botão Voltar
         btnVoltar = new JButton("Voltar ao Menu");
-        btnVoltar.setBounds(180, 336, 150, 50);
+        btnVoltar.setBounds(180, 356, 150, 30);
         btnVoltar.addActionListener(e -> voltarAoMenu());
         panelExtras.add(btnVoltar);
 
         // Painel para resumo do pedido
         JPanel panelResumo = new JPanel();
-        panelResumo.setBounds(5, 485, 963, 275); // Ajustado o tamanho do painel
+        panelResumo.setBounds(5, 422, 963, 235); // Ajustado o tamanho do painel
         panelResumo.setBorder(BorderFactory.createTitledBorder("Resumo do Pedido"));
         contentPane.add(panelResumo);
-        panelResumo.setLayout(new BorderLayout(10, 10));
-
-        textAreaResumo = new JTextArea(10, 50);
-        textAreaResumo.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textAreaResumo);
-        panelResumo.add(scrollPane, BorderLayout.CENTER);
+        panelResumo.setLayout(null);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setEnabled(false);
+        scrollPane.setBounds(6, 16, 951, 208);
+        panelResumo.add(scrollPane);
+        
+                textAreaResumo = new JTextArea(10, 30);
+                scrollPane.setViewportView(textAreaResumo);
+                textAreaResumo.setEditable(false);
     }
 
     /**

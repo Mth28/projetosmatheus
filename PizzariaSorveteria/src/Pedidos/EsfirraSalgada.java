@@ -3,7 +3,6 @@ package Pedidos;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 
 public class EsfirraSalgada extends JFrame {
 

@@ -1,8 +1,6 @@
 package Pedidos;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.util.HashMap;
@@ -18,6 +16,7 @@ public class Sorvetes extends JFrame {
     private JTextField txtEndereco;
     private JCheckBox[] checkBoxesSabores;
     private JComboBox<String> comboBoxPagamento;
+    private JCheckBox chckbxNotaFiscal;
     private Map<String, Integer> saboresMap;
 
     public static void main(String[] args) {
@@ -34,7 +33,7 @@ public class Sorvetes extends JFrame {
     public Sorvetes() {
         setTitle("Sorvetes e Sabores");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 650, 700); // Aumentado para acomodar o campo de endereço
+        setBounds(100, 100, 650, 750); // Ajustado para acomodar o campo de nota fiscal
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -69,15 +68,20 @@ public class Sorvetes extends JFrame {
         comboBoxPagamento.setBounds(320, 60, 200, 30);
         contentPane.add(comboBoxPagamento);
 
+        // CheckBox para Nota Fiscal
+        chckbxNotaFiscal = new JCheckBox("Desejo receber nota fiscal");
+        chckbxNotaFiscal.setBounds(320, 100, 200, 30);
+        contentPane.add(chckbxNotaFiscal);
+
         // Botão para mostrar pedido
         JButton btnMostrarPedido = new JButton("Mostrar Pedido");
-        btnMostrarPedido.setBounds(320, 112, 150, 30);
+        btnMostrarPedido.setBounds(320, 140, 150, 30);
         btnMostrarPedido.addActionListener(e -> mostrarPedido());
         contentPane.add(btnMostrarPedido);
 
         // Botão para voltar ao menu
         JButton btnVoltarMenu = new JButton("Voltar ao Menu");
-        btnVoltarMenu.setBounds(338, 610, 150, 30);
+        btnVoltarMenu.setBounds(320, 530, 150, 30);
         btnVoltarMenu.addActionListener(e -> {
             dispose(); // Fecha a janela atual
             // new Menu().setVisible(true); // Descomente isso se houver uma classe Menu
@@ -86,39 +90,39 @@ public class Sorvetes extends JFrame {
 
         // Formulário para cadastro de cliente
         JLabel lblNome = new JLabel("Nome:");
-        lblNome.setBounds(320, 150, 100, 20);
+        lblNome.setBounds(320, 181, 100, 20);
         contentPane.add(lblNome);
 
         txtNome = new JTextField();
-        txtNome.setBounds(320, 181, 200, 20);
+        txtNome.setBounds(320, 211, 200, 20);
         contentPane.add(txtNome);
 
         JLabel lblTelefone = new JLabel("Telefone:");
-        lblTelefone.setBounds(320, 212, 100, 20);
+        lblTelefone.setBounds(320, 242, 100, 20);
         contentPane.add(lblTelefone);
 
         txtTelefone = new JTextField();
-        txtTelefone.setBounds(320, 243, 200, 20);
+        txtTelefone.setBounds(320, 272, 200, 20);
         contentPane.add(txtTelefone);
 
         JLabel lblEmail = new JLabel("E-mail:");
-        lblEmail.setBounds(320, 274, 100, 20);
+        lblEmail.setBounds(320, 303, 100, 20);
         contentPane.add(lblEmail);
 
         txtEmail = new JTextField();
-        txtEmail.setBounds(320, 296, 200, 20);
+        txtEmail.setBounds(320, 333, 200, 20);
         contentPane.add(txtEmail);
 
         JLabel lblEndereco = new JLabel("Endereço:");
-        lblEndereco.setBounds(320, 327, 100, 20);
+        lblEndereco.setBounds(320, 364, 100, 20);
         contentPane.add(lblEndereco);
 
         txtEndereco = new JTextField();
-        txtEndereco.setBounds(320, 358, 200, 20);
+        txtEndereco.setBounds(320, 394, 200, 20);
         contentPane.add(txtEndereco);
 
         JButton btnCadastrarCliente = new JButton("Cadastrar Cliente");
-        btnCadastrarCliente.setBounds(320, 390, 200, 30);
+        btnCadastrarCliente.setBounds(320, 425, 200, 30);
         btnCadastrarCliente.addActionListener(e -> cadastrarCliente());
         contentPane.add(btnCadastrarCliente);
     }
@@ -199,6 +203,11 @@ public class Sorvetes extends JFrame {
         sb.append("Telefone: ").append(telefone).append("\n");
         sb.append("E-mail: ").append(email).append("\n");
         sb.append("Endereço: ").append(endereco).append("\n");
+
+        if (chckbxNotaFiscal.isSelected()) {
+            sb.append("\nNota Fiscal:\n");
+            sb.append("Nota fiscal emitida com sucesso.\n");
+        }
 
         JOptionPane.showMessageDialog(this, sb.toString(), "Resumo do Pedido", JOptionPane.INFORMATION_MESSAGE);
     }
