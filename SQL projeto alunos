@@ -1,0 +1,96 @@
+SELECT * FROM Alunos;
+
+SELECT A.Nome, A.Email
+FROM Alunos A
+JOIN Turmas T ON A.TurmaID = T.TurmaID
+WHERE T.NomeTurma = '9º Ano A';
+
+INSERT INTO Alunos (Nome, DataNascimento, Email, TurmaID) VALUES
+('Ana Clara', '2007-08-18', 'ana.clara@email.com', 1);
+
+UPDATE Notas
+SET Nota = 9.2
+WHERE AlunoID = 1 AND DisciplinaID = 1; -- Altera a nota do aluno com ID 1 em Matemática
+
+SELECT A.Nome AS NomeAluno, T.NomeTurma AS Turma
+FROM Alunos A
+JOIN Turmas T ON A.TurmaID = T.TurmaID;
+
+SELECT AVG(Nota) AS MediaNotas
+FROM Notas
+WHERE AlunoID = 1;
+
+SELECT DISTINCT A.Nome
+FROM Alunos A
+JOIN Notas N ON A.AlunoID = N.AlunoID
+WHERE N.Nota > 8;
+
+-- Criação da tabela de Alunos
+CREATE TABLE Alunos (
+    AlunoID INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    DataNascimento DATE,
+    Email VARCHAR(100) UNIQUE,
+    TurmaID INT
+);
+
+-- Criação da tabela de Turmas
+CREATE TABLE Turmas (
+    TurmaID INT PRIMARY KEY AUTO_INCREMENT,
+    NomeTurma VARCHAR(50) NOT NULL,
+    ProfessorResponsavel VARCHAR(100)
+);
+
+-- Criação da tabela de Disciplinas
+CREATE TABLE Disciplinas (
+    DisciplinaID INT PRIMARY KEY AUTO_INCREMENT,
+    NomeDisciplina VARCHAR(50) NOT NULL
+);
+
+-- Criação da tabela de Notas (relacionamento muitos-para-muitos entre Alunos e Disciplinas)
+CREATE TABLE Notas (
+    AlunoID INT,
+    DisciplinaID INT,
+    Nota DECIMAL(4, 2) NOT NULL,
+    DataAvaliacao DATE,
+    FOREIGN KEY (AlunoID) REFERENCES Alunos(AlunoID),
+    FOREIGN KEY (DisciplinaID) REFERENCES Disciplinas(DisciplinaID),
+    PRIMARY KEY (AlunoID, DisciplinaID) -- Chave primária composta
+);
+
+-- Inserindo dados nas tabelas
+
+-- Turmas
+INSERT INTO Turmas (NomeTurma, ProfessorResponsavel) VALUES
+('9º Ano A', 'Maria Souza'),
+('9º Ano B', 'João Silva'),
+('8º Ano C', 'Ana Paula');
+
+-- Alunos
+INSERT INTO Alunos (Nome, DataNascimento, Email, TurmaID) VALUES
+('Pedro Alves', '2006-03-15', 'pedro.alves@email.com', 1),
+('Laura Mendes', '2007-01-20', 'laura.mendes@email.com', 1),
+('Lucas Costa', '2006-11-05', 'lucas.costa@email.com', 2),
+('Sofia Pereira', '2007-05-25', 'sofia.pereira@email.com', 2),
+('Enzo Rocha', '2008-07-10', 'enzo.rocha@email.com', 3);
+
+-- Disciplinas
+INSERT INTO Disciplinas (NomeDisciplina) VALUES
+('Matemática'),
+('Português'),
+('História'),
+('Ciências');
+
+-- Notas
+INSERT INTO Notas (AlunoID, DisciplinaID, Nota, DataAvaliacao) VALUES
+(1, 1, 8.5, '2024-10-20'),
+(1, 2, 9.0, '2024-10-25'),
+(2, 1, 7.8, '2024-10-20'),
+(2, 3, 8.2, '2024-11-10'),
+(3, 2, 6.5, '2024-10-25'),
+(3, 4, 7.0, '2024-11-05'),
+(4, 1, 9.5, '2024-10-20'),
+(4, 3, 8.8, '2024-11-10'),
+(5, 4, 7.2, '2024-11-05');
+
+
